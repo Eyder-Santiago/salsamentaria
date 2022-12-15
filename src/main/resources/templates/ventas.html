@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ventas</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Link boostrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"/>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <link rel="stylesheet" th:href="@{/css/ventas.css}"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <header class="bg-danger text-white">
+                <div class="row align-items-center">
+
+                    <div class="col-1">
+
+                        <a class="text-light text-decoration-none" th:href="@{/salirVentas}"><i class="fa-solid fa-house-user"></i> Inicio</a>
+                    </div>
+                    <div class="col-10">
+                        <div class="text-end">
+                            <h2 class="Ventas L y M">Salsamentaría L & M</h2>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <img src="/img/logo.png" width="80" alt="auto" class="img-fluid" />
+                    </div>
+                </div>
+            </header>
+            <hr>             
+
+                <div class="row justify-content-center mt-4">
+                    <div class="col-4 text-center mb-3">
+                        <h2><b>Ventas</b></h2>
+
+                    </div>
+                </div>
+                <hr/> 
+
+                <div class="row mt-5 mb-2">                
+                    <div class="col-6">
+                        <form th:action="@{/busqueda}" class="row g-3">                            
+                            <div class="col-8">
+                                <label for="busqueda" class="form-label"><b>Búsqueda por nombre o descripción:</b></label>
+                                <input class="form-control" type="text" name="busqueda" th:value="${busqueda}" 
+                                       placeholder="Búsqueda" required="required"/>
+                            </div>
+                            <div class="col-2 mt-4">
+                                <br/>
+                                <button type="submit" id="botonBuscar" class="btn btn-danger">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                                </button>  
+                            </div>
+                            <div class="col-1 mt-4">
+                                <br/>
+                                <a th:href="@{/limpiarBusqueda}" class="btn btn-secondary">Limpiar</a>
+                            </div>
+
+                            <div th:if="${param.advertencia}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    No se encontro ningún resultado.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia4}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    No hay existencia del producto. Agrega la cantidad en el inventario.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia5}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    La cantidad para agregar supera la registrada en el inventario.
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <h3>Factura</h3>
+                        <!-- agregar producto cod barras -->
+                        <form method="POST" th:action="@{/agregarProductoCodigoBarras}" th:object="${producto}">
+                            <input class="form-control-sm" autofocus type="number" name="codigobarras" th:field="*{codigo}" 
+                                   placeholder="Código de barras" required="true"  min="1"/>
+                        </form>
+
+                        <form method="POST" th:action="@{/generarVenta}" th:object="${vendedor}">
+                            <input class="form-control-sm"type="hidden" name="codigo" th:field="*{codigo}"/>
+                            <input class="form-control-sm" type="text" name="vendedor" th:field="*{nombre}" disabled="disabled"/>
+                            <a th:href="@{/limpiarVenta}" class="btn btn-secondary">eliminar venta</a>
+
+                            <div th:if="${param.exito}" class="alert alert-success d-flex" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    La venta ha sido guardada éxitosamente, Código de venta: <span th:text="${param.codigo}">valor</span>
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia1}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    No se encontro ningún producto para agregar.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia2}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Debes de poner un valor mayor a 0 para editar la cantidad.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia3}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Debes de poner un valor entero para editar la cantidad.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia6}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    No hay existencia del producto. Agrega la cantidad en el inventario.
+                                </div>
+                            </div>
+                            <div th:if="${param.advertencia7}" class="alert alert-warning d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    La cantidad para agregar supera la registrada en el inventario.
+                                </div>
+                            </div>
+                            <div th:if="${param.error}" class="alert alert-danger d-flex mt-2" role="alert">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Debes de agregar productos para realizar la venta.
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3 mb-5">                
+                    <div class="col-6">
+
+                        <table class="table" th:if="${listaBusqueda != null}">
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>PRECIO</th>
+                                <th></th>
+                            </tr>
+                            <tr th:each="busqueda : ${listaBusqueda}">
+                                <td th:text="${busqueda.nombre}">Mostrar nombre</td>
+                                <td th:text="${busqueda.descripcion}">Mostrar descripcion</td>
+                                <td th:text="${busqueda.precio}">Mostrar precio</td>
+                                <td>
+                                    <a class="text-danger" title="Agregar" th:href="@{/agregarProductoVenta/} + ${busqueda.codigo}"><i class="fa-solid fa-circle-plus"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-6">
+                        <table class="table" th:if="${listaProductosVenta != null}">
+                            <tr>
+                                <th>NOMBRE</th>
+                                <th>PRECIO</th>
+                                <th>CANTIDAD</th>
+                                <th>SUB TOTAL</th>
+                                <th></th>
+                                <th></th>
+
+                            </tr>
+
+                            <tr th:each="productoVenta : ${listaProductosVenta}">
+
+                                <td th:text="${productoVenta.nombre}">Mostrar nombre</td>
+                                <td th:text="${productoVenta.precio}">Mostrar precio</td>
+                                <td th:text="${productoVenta.cantidadVenta}">Mostrar cantidadVenta </td>
+                                <td th:text="${productoVenta.subTotal}">Mostrar subtotal</td>
+                                <td>
+                                    <a th:href="@{/producto/(codigo=${productoVenta.codigo})}" 
+                                       class="btn btn-danger edicion">Editar</a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/eliminarProductoVenta/} + ${productoVenta.codigo}" class="text-danger" title="Eliminar">
+                                        <i class="fa-solid fa-circle-minus"></i></a>
+                                </td>
+                            </tr> 
+
+                            <tr>
+                                <td></td> 
+                                <td></td>
+                                <td></td>
+                                <td> <input class="form-control-sm" th:value="${total}" disabled="disable"/></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                        <div th:if="${listaProductosVenta!=null}">
+
+                            <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#venta">
+                                <i class="bi bi-cart"></i> Vender</button>
+                        </div>  
+                        <!---->
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-auto">
+                    <footer class="col-12 bg-danger pos-footer">
+                        <div class="align-items-center">
+                            <div class="text-center text-white">
+                                <p>Universidad del valle - Sistema de ventas Lympus &COPY;</p>
+                            </div>
+                        </div>
+
+                    </footer>
+
+                </div>
+                <!--modal editar cantidad-->
+                <div class="modal fade"  id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Editar cantidad</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" th:action="@{/editarCantidadProducto}" th:object="${producto}">
+                                <div class="modal-body">
+
+                                    <input id="codigoEditar" name="codigo" type="hidden"/>
+                                    <input class="form-control" min="0.1" type="number" step="any" name="cantidad" placeholder="Ingrese la cantidad" 
+                                           required="true"/>
+                                    <input id="unidadMedida" type="hidden" name="unidadMedida"/>   
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--modal vender-->
+                <div class="modal fade"  id="venta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Vender</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form  method="POST" th:action="@{/generarVenta}" th:object="${vendedor}">
+
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <input class="form-control-sm"type="hidden" name="codigo" th:field="*{codigo}"/>
+                                        <label class="form-label" for="vendedor">Vendedor:</label>
+                                        <input class="form-control" type="text" name="vendedor" th:field="*{nombre}" disabled="disabled"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="vendedor">Total:</label>
+                                        <input class="form-control"  th:value="${total}" disabled="disabled"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="valorPago">Valor de pago:</label>
+                                        <input class="form-control" type="number"  th:min="${total}" name="valorPago"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="triggerImpresion" th:if="${param.codigo!=null}" class="d-none">usado para ejecutar el modal con js</div>
+                <!-- modal de impresion -->
+                <div th:if="${param.codigo!=null}" class="modal fade" id="modalImpresion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Finalización de venta</h5>
+                           
+                            </div>
+                            <div class="modal-body">
+                                
+                                <p>
+                                   Cambio:  $<span th:text="${param.cambio}">cambio</span>
+                                </p>
+                                <p>  
+                                    ¿Desea imprimir la venta generada? código de venta: <span th:text="${param.codigo}">codigo</span>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a th:href="@{/ventaPdf/(codigo=${param.codigo})}" th:target="_blank" class="btn btn-primary">Si</a>
+                                <a th:href="@{/ventas}" class="btn btn-danger">No</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <!-- js de jquery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script><!-- jquery -->
+        <!-- js de bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- js personalizado -->
+        <script th:src="@{/js/ventas.js}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 25/06/2022, 11:26:12 p. m.
+    Author     : Programar
+*/
+
+.pos-footer{
+    position: fixed;
+    top:95%;
+    left: 0;
+    z-index: 9999;
+
+}
+
+
+.taminpust{
+   
+    height: 35px;
+    border-color: red crimson;
+    border-bottom: -1px;
+}
+
+.tamselect{
+    width: 50%;
+}
+
+

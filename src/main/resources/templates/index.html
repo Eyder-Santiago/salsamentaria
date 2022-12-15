@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Link boostrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+        <!-- font awesome usado para iconos svg -->
+        <!--<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>-->
+        <script src="https://kit.fontawesome.com/53305f8af1.js" crossorigin="anonymous"></script>
+        <!-- css personalizado-->
+        <link rel="stylesheet" th:href="@{/css/index.css}"/>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <header class="bg-danger text-white">
+                <div class="row align-items-center">
+
+                    <div class="col-2" th:object="${usuario}">
+                        <div class="dropdown text-end">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-light"
+                               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                <i class="fa-solid fa-user"></i> <span th:text="${usuario.nombre}"> nombre</span>
+                            </a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/configuracion}"><i class="fa-solid fa-gear fa-lg"></i> <b>Configuración</b></a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider" />
+                                </li>
+                                <li>
+
+                                    <form method="POST" th:action="@{/logout}">
+
+                                        <a class="dropdown-item text-decoration-none" href="#" 
+                                           onclick="this.parentNode.submit();">
+                                            <i class="fa-solid fa-door-open"></i></i><b> Salir</b></a>
+
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="col-9">
+                        <div class="text-end">
+                            <h2 class="Ventas L y M">Salsamentaría L & M</h2>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <img src="/img/logo.png" width="80" alt="auto" class="img-fluid" />
+                    </div>
+                </div>
+
+            </header>
+
+            <!-- <header>
+                        <div class="container-fluid" style="background-color: rgb(248, 242, 242);">
+                            <div class="row">
+                                <div class="col-1">
+                                    <form method="POST" th:action="@{/logout}">
+                                        <a href="#" onclick="this.parentNode.submit();">Salir</a>
+                                    </form>  
+                                </div>
+        
+                                <div class="col-11 justify-content-end">
+                                    <div class="breadcrumb justify-content-end">
+                                        <a th:href="@{/configuracion}">Config</a>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                <div class="col">
+                                    <div class="text-center">
+                                        <h1>Sistema de ventas salsamentaria L y M</h1>
+                                    </div>
+        
+                                    <hr/>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                            </div> --> 
+
+            <div class="row mt-5">
+                <div class="col-3 text-center mt-3">
+                    <div class="card ancho-cards">
+                        <div class="card-body">
+                            <i class="fa-regular fa-money-bill-1 fa-10x"></i>
+                            <h5 class="mt-5 card-title text-danger"><b>Ventas</b></h5>
+                            <p class="card-text">Facture y venda productos.</p>
+
+                            <a  th:href="@{/ventas}" class="btn btn-outline-danger">Acceder</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3 text-center mt-3">
+                    <div class="card ancho-cards">
+                        <div class="card-body">
+                            <i class="fa-solid fa-cart-flatbed fa-10x"></i>
+                            <h5 class="mt-5 card-title text-danger"><b>Inventario</b></h5>
+                            <p class="card-text">Consulte y modifique productos.</p>                            
+                            <a  th:href="@{/inventario}" class="btn btn-outline-danger">Acceder</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-3 text-center mt-3">
+                    <div class="card ancho-cards">
+                        <div class="card-body">
+                            <i class="fa-solid fa-chart-line fa-10x"></i>
+                            <h5 class="mt-5 card-title text-danger"><b>Reportes</b></h5>
+                            <p class="card-text">Visualice sus ganancias.</p>
+
+                            <a th:href="@{/reportes}" class="btn btn-outline-danger">Acceder</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-3 text-center mt-3">
+                    <div class="card ancho-cards">
+                        <div class="card-body">
+                            <i class="fa-solid fa-magnifying-glass-dollar fa-10x"></i>
+                            <h5 class="mt-5 card-title text-danger"><b>Consultas</b></h5>
+                            <p class="card-text">Consulte facturación.</p>
+
+                            <a th:href="@{/consultas}" class="btn btn-outline-danger">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <footer class="position-absolute bottom-0 start-50 translate-middle-x bg-danger">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center text-white">
+                            <p>Universidad del valle - Sistema de ventas Lympus &COPY;</p>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+
+        <!-- js de bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

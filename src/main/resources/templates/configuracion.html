@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Configuracion</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+        <!-- font awesome usado para iconos svg -->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <script src="https://kit.fontawesome.com/e504a05327.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+
+        <div class="container-fluid">
+
+            <header class="bg-danger text-white">
+                <div class="row align-items-center">
+
+                    <div class="col-1">
+                        <div class="text-center">
+                            <a class="text-light text-decoration-none" th:href="@{/}"><i class="fa-solid fa-house-user"></i> Inicio</a>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="text-end">
+                            <h2 class="Ventas L y M">Salsamentaria L & M</h2>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <img src="/img/logo.png" width="80" alt="auto" class="img-fluid" />
+                    </div>
+                </div>
+
+            </header>
+
+            <!--configuracion-->
+
+
+
+
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="mt-5 card text-center">
+                        <div class="card-header">
+                            <h2>Gestion de información</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Configuración general</h5>
+                            <hr />
+                            <div class="align-items-center">
+
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-user-gear fa-5x"></i>
+                                        <div class="w-100"></div>
+                                        <label for="datosinput" class="form-label"><b>Datos personales</b></label>
+                                        <div class="w-100"></div>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalDatosPersonales">Editar</button>
+
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fa-solid fa-key fa-5x"></i>
+                                        <div class="w-100"></div>
+                                        <label for="passinput" class="form-label"><b>Contraseña</b></label>
+                                        <div class="w-100"></div>
+
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalPassword">Editar</button>
+                                    </div>
+                                </div>
+
+                                <!-- <a href="#" class="btn btn-primary">Guardar</a> -->
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="text-dark"><b>Verifique la información antes de guardar.</b></p>
+
+                        </div>
+
+                    </div>
+                    <div th:if="${param.exito1}" class="mt-2 alert alert-success d-flex" role="alert">
+                        <div class="text-center">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Los datos personales se cambiaron exitosamente.
+                        </div>
+                    </div>
+
+                    <div th:if="${param.exito2}" class="mt-2 alert alert-success d-flex" role="alert">
+                        <div class="text-center">
+                            <i class="fa-solid fa-circle-check"></i>
+                            La contraseña se cambio exitosamente.
+                        </div>
+                    </div>
+                    <div th:if="${param.error1}" class="mt-2 alert alert-danger d-flex" role="alert">
+                        <div class="text-center">
+                            <i class="fa-solid fa-xmark"></i>
+                            Error. La contraseña actual no coincide con la digitada
+                        </div>
+                    </div>
+                    <div th:if="${param.error2}" class="mt-2 alert alert-danger d-flex" role="alert">
+                        <div class="text-center">
+                            <i class="fa-solid fa-xmark"></i>
+                            Error. La contraseña nueva no es la misma que la contraseña de confirmación
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- datos personales 
+            <h4>configuracion</h4>
+            <hr/>
+            <div>  
+                <label>Edita datos personales</label>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales">
+                    editar
+                </button>
+            </div>
+
+
+            <label>Edita contrasena</label>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPassword">
+                editar
+            </button>-->
+
+
+
+            <div class="row">
+
+                <div class="col-12 text-center">
+
+                </div>
+
+                <footer class="row position-absolute bottom-0 start-50 translate-middle-x bg-danger">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center text-white">
+                            <p>Universidad del valle - Sistema de ventas Lympus &COPY;</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Modal editar datos personales -->
+        <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="modalDatosPersonales" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Datos personales</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="was-validated" method="POST" th:action="@{/modificarDatosPersonales}" th:object="${usuario}">
+                            <div class="mb-3">
+                                <input type="hidden" id="codigo" th:field="*{codigo}"/>
+                                <input sec:authorize="hasRole('ROLE_USER')" type="hidden" 
+                                       id="codigoAdministrador" th:field="*{codigoAdministrador.codigo}"/>
+                                <input type="hidden" th:field="*{correo}"/>
+                                <input type="hidden" th:field="*{contrasena}"/>
+
+
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required="true"/>
+                            </div>
+                            <div class="mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <label for="negocio">Negocio:</label>
+                                <input type="text" class="form-control" name="negocio" th:field="*{nombreNegocio}" required="true"/>
+                            </div>
+                            <div class="mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <label for="nit">Nit:</label>
+                                <input type="number" class="form-control" name="nit" th:field="*{nitNegocio}" required="true"/>
+                            </div>
+                            <div class="mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" class="form-control" name="direccion" th:field="*{direccion}" required="true"/>
+                            </div>
+                            <div class="mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" name="telefono" th:field="*{telefono}" required="true"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-danger">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal editar password -->
+        <div class="modal fade" id="modalPassword" tabindex="-1" aria-labelledby="modalCorreo" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Contraseña</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="was-validated" method="POST" th:action="@{/modificarContrasena}" th:object="${usuario}">
+                            <input type="hidden" id="codigo" th:field="*{codigo}"/>
+                            <input type="hidden" id="correo" th:field="*{correo}"/>
+                            <input type="hidden" id="contrasena" th:field="*{contrasena}"/>
+                            <input type="hidden" id="nombre" th:field="*{nombre}"/>
+
+                            <input sec:authorize="hasRole('ROLE_USER')" type="hidden" 
+                                   id="codigoAdministrador" th:field="*{codigoAdministrador.codigo}"/>
+                            <input sec:authorize="hasRole('ROLE_ADMIN')" type="hidden" 
+                                   th:field="*{nombreNegocio}"/>
+                            <input sec:authorize="hasRole('ROLE_ADMIN')" type="hidden" 
+                                   th:field="*{nitNegocio}"/>
+                            <input sec:authorize="hasRole('ROLE_ADMIN')" type="hidden" 
+                                   th:field="*{direccion}"/>
+                            <input sec:authorize="hasRole('ROLE_ADMIN')" type="hidden" 
+                                   th:field="*{telefono}"/>
+                            <div class="mb-3">
+                                <label for="contrasenaActual" class="form-label">Contraseña actual:</label>
+                                <input type="password" class="form-control" name="contrasenaActual"  required="true"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contrasenaNueva" class="form-label">Contraseña nueva:</label>
+                                <input type="password" class="form-control" name="contrasenaNueva" required="true"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contrasenaConfirmacion" class="form-label">Confirmación de contraseña:</label>
+                                <input type="password" class="form-control" name="contrasenaConfirmacion" required="true"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-danger">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- js de bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

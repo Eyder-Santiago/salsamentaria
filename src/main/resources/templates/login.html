@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Link boostrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+            />
+        <!-- font awesome usado para iconos svg -->
+        <script src="https://kit.fontawesome.com/e504a05327.js" crossorigin="anonymous"></script>
+       
+
+    </head>
+    <body>
+        <div class="container">
+
+
+            <header class="bg-danger text-white">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <ul class="nav justify-content-end">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#mision"> Misión </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#vision"> Visión </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#nosotros">Nosotros</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#contacto">Contacto</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <img src="/img/logo.png" width="300" alt="auto" class="img-fluid"/>
+                    </div>
+                    <h2 class="fw-bold text-center py-5">Salsamentaría</h2>
+
+                </div>
+            </div>
+
+            <!--Login-->
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div th:if="${param.error}" class="alert alert-danger d-flex" role="alert">
+                        <div class="text-center">
+                            <i class="fa-solid fa-xmark"></i>
+                            Error en las credenciales
+                        </div>
+                    </div>
+                    <form method="POST" th:action="@{/login}"><!-- indicamos que el metodo va ser post y sera el login -->
+                        <div class="mb-4">
+                            <label for="username" class="form-label"><i class="bi bi-envelope"></i> Correo:</label>
+                            <input type="email" class="form-control" name="username" id="username" required="required" placeholder="Correo electrónico"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label"><i class="bi bi-key"></i> Contraseña:</label>
+                            <input type="password" class="form-control" name="password" id="password" required="required" placeholder="contraseña"/>
+                        </div>
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-outline-danger" value="Ingresar"/>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                </div>
+                <footer class="bg-danger mt-5">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center text-white ">
+                            <p>Universidad del valle - Sistema de ventas Lympus &COPY;</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+            <div class="modal fade" id="mision">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Misión</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button> 
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                <div class="text-center">
+                                    <img src="/img/logo.png" width="300" alt="auto" class="img-fluid"/>
+                                </div>
+
+                                <p>Salsamentaría y pre cocidos L&M busca suplir las necesidades de los consumidores y canasta familiar,
+                                    dándonos a conocer con productos de alta calidad y con precios muy asequibles,
+                                    además de garantizar el buen estado de cada uno ellos.</p>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="vision">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Visión</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                <div class="text-center">
+                                    <img src="/img/logo.png" width="300" alt="auto" class="img-fluid"/>
+                                </div>
+                                <p>Por cuanto se ha luchado en sacar adelante este modelo de negocio,
+                                    y al buen responder que ha dado, se espera que salsamentaría y
+                                    pre cocidos L&M en un tiempo estimado de 3 a 5 años,
+                                    pasara de ser un pequeño negocio a ser distribuidora,
+                                    es decir que no solo será para venta al público al detal,
+                                    sino también para abastecer negocios de nuestra misma categoría al x mayor,
+                                    todo esto para el propósito de crecer a nivel personal, a nivel de empresa y
+                                    de un buen estado financiero, como también para generar mucho más empleo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" id="contacto">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Contacto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                <div class="text-center">
+                                    <img src="/img/logo.png" width="300" alt="auto" class="img-fluid"/>
+                                </div>
+
+                                <p>Nombre del administrador:
+
+                                    <div class="w-100">•Karen Lizeth Arenas Ortiz</div>
+
+                                    <div class="w-100">•Celular: 310 729 2255</div>
+
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="nosotros">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Nosotros</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                <div class="text-center">
+                                    <img src="/img/logo.png" width="300" alt="auto" class="img-fluid"/>
+                                </div>
+                                <p>Salsamentaría y pre cocidos L&M nació por una pequeña idea de negocio de una joven,
+                                    joven ahora propietaria de dicha salsamentaría, y todo se basó en la necesidad de
+                                    querer generar ingresos económicos, para ello tuvo que vender una motocicleta que
+                                    era su medio de transporte e invertir el dinero en lo que fue su primer refrigerador,
+                                    en el cual solo se vendían algunos productos cárnicos como pollo, costilla, bofe etc.
+                                    Gracias a los consumidores que la apoyan con cada una de sus compras el negocio fue
+                                    creciendo y de forma rápida, Lizeth quien es la propietaria se enfocó en adquirir
+                                    todas y cada una de las cosas nuevas que pedían los clientes, así nació la necesidad
+                                    de adquirir 2 refrigeradores más para la venta de lácteos y derivados, carnes frías,
+                                    embutidos y pre cocidos, Salsas y aderezos, desechables y muchos productos más,
+                                    al pasar de algunos meses empezaron a conocerla los negocios de comidas rápidas
+                                    quienes han adquirido sus productos para la venta de los suyos,
+                                    y es así como ya cuenta o brinda el servicio en punto de venta y a domicilio.</p>
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <!-- js de bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    </body>
+</html>
