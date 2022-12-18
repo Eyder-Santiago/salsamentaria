@@ -25,6 +25,8 @@ public class ControladorInicio {
     private AdministradorService administradorService;
     @Autowired
     private EmpleadoService empleadoService;
+    
+    String roleAdmin = "[ROLE_ADMIN]";
 
     /**
      * @author JHOJAN L
@@ -35,7 +37,7 @@ public class ControladorInicio {
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user) { //@AuthenticationPrincipal User user){// @AuthenticationPrincipal User user CON ESTO PODEMOS CAPTURAR EL USUSARIO QUE HIZO LOGIN
 
-        if (user.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
+        if (user.getAuthorities().toString().equals(roleAdmin)) {
             var usuario = (Administrador) obtenerDatosUsuario(user.getAuthorities().toString(), user.getUsername());
             model.addAttribute("usuario", usuario);
 
@@ -95,7 +97,7 @@ public class ControladorInicio {
             @Param("contrasenaNueva") String contrasenaNueva,
             @Param("contrasenaConfirmacion") String contrasenaConfirmacion) {
 
-        if (user.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
+        if (user.getAuthorities().toString().equals(roleAdmin)) {
 
             var validacion = compararContrasenaAdmin(administrador, contrasenaActual,
                     contrasenaNueva, contrasenaConfirmacion);
@@ -135,7 +137,7 @@ public class ControladorInicio {
      */
     public void actualizarDatos(String rol, Administrador administrador, Empleado empleado) {
 
-        if (rol.equals("[ROLE_ADMIN]")) {
+        if (rol.equals(roleAdmin)) {
 
             administradorService.guardar(administrador);
 
@@ -153,7 +155,7 @@ public class ControladorInicio {
      */
     public Object obtenerDatosUsuario(String rol, String correo) {//obtengo todos los datos del usuario logeado
 
-        if (rol.equals("[ROLE_ADMIN]")) {
+        if (rol.equals(roleAdmin)) {
             return administradorService.encontrarAdministradorPorCorreo(correo);
 
         } else {

@@ -128,7 +128,6 @@ public class ControladorReportes {
 
     private void ingresarDatosReporteVenta(Reporte r, List<Venta> listaVentas) {
 
-//        var rvk= new ReporteVentaPk();
         var rv = new ReporteVenta();
         var venta = new Venta();
         var rvpk = new ReporteVentaPK(r.getCodigo());

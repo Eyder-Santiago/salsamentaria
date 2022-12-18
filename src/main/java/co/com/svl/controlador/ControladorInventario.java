@@ -137,7 +137,6 @@ public class ControladorInventario {
     }
 
     private void insertarDatos(Producto producto) {
-        var a = new Administrador();
         var admin = administradorService.encontrarAdministrador((short)1);
         //establecemos el administrador en este caso es el cod 1 ya que la 
         //aplicacion solo cuenta con este administrador

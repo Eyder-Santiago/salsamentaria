@@ -40,6 +40,8 @@ public class ControladorConsultas {
     
     private final List<Venta> listaConsulta = new ArrayList<>();
 
+    String redcon = "redirect:/consultas";
+    String redadvertencia = "redirect:/consultas?advertencia=true";
     
 
     /**
@@ -95,10 +97,10 @@ public class ControladorConsultas {
 
             listaConsulta.clear();
             listaConsulta.add(venta);
-            return "redirect:/consultas";
+            return redcon;
         } else {
             listaConsulta.clear();
-            return "redirect:/consultas?advertencia=true";
+            return redadvertencia;
 
         }
 
@@ -127,11 +129,11 @@ public class ControladorConsultas {
             listaConsulta.clear();
             listaConsulta.addAll(listaEncontrada);
 
-            return "redirect:/consultas";
+            return redcon;
 
         } else {
             listaConsulta.clear();
-            return "redirect:/consultas?advertencia=true";
+            return redadvertencia;
 
         }
 
@@ -156,11 +158,11 @@ public class ControladorConsultas {
 
                 listaConsulta.clear();
                 listaConsulta.addAll(listaEncontrada);
-                return "redirect:/consultas";
+                return redcon;
 
             } else {
                 listaConsulta.clear();
-                return "redirect:/consultas?advertencia=true";
+                return redadvertencia;
             }
 
         } else if (opcion == 2) {//2 filtra por empleado
@@ -173,16 +175,16 @@ public class ControladorConsultas {
 
                 listaConsulta.clear();
                 listaConsulta.addAll(listaEncontrada);
-                return "redirect:/consultas";
+                return redcon;
 
             } else {
                 listaConsulta.clear();
-                return "redirect:/consultas?advertencia=true";
+                return redadvertencia;
             }
 
         }
 
-        return "redirect:/consultas";
+        return redcon;
     }
 
     /**
@@ -203,7 +205,7 @@ public class ControladorConsultas {
     public String limpiarConsultas() {
 
         listaConsulta.clear();
-        return "redirect:/consultas";
+        return redcon;
     }
 
 }

@@ -102,17 +102,18 @@ public class ReporteVentaPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+        boolean resultado = true;
         if (!(object instanceof ReporteVentaPK)) {
-            return false;
+            resultado = false;
         }
         ReporteVentaPK other = (ReporteVentaPK) object;
         if (this.codigoReporte != other.codigoReporte) {
-            return false;
+            resultado = false;
         }
         if (this.codigoVenta != other.codigoVenta) {
-            return false;
+            resultado = false;
         }
-        return true;
+        return resultado;
     }
 
     /**

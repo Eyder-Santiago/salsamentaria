@@ -256,7 +256,6 @@ public class ControladorVentas {
 
                     if (posicion != -1) {//si no es -1 existe en la lista
                         log.info("validacion existe en la lista");
-                        var valorLista = listaVentaProductos.get(posicion).getCantidadVenta();//obtengo la cantidad de la lista de ventas de dicho producto
 
                         if (producto.getCantidad() <= productoInventario.getCantidad()) {// si la cantidad actual es igual o menor a la cantidad del producto en en el inv
 
@@ -419,7 +418,7 @@ public class ControladorVentas {
 
                     if (cantidad != 0) {
 
-                        productoI.setCantidadVenta((double) cantidad);
+                        productoI.setCantidadVenta( cantidad);
 
                     } else {
 

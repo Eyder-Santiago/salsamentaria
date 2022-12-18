@@ -232,15 +232,16 @@ public class ProductoVenta implements Serializable {
      */
     @Override
     public boolean equals(Object object) {
+        boolean resultado = true;
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ProductoVenta)) {
-            return false;
+            resultado = false;
         }
         ProductoVenta other = (ProductoVenta) object;
         if ((this.productoVentaPK == null && other.productoVentaPK != null) || (this.productoVentaPK != null && !this.productoVentaPK.equals(other.productoVentaPK))) {
-            return false;
+            resultado = false;
         }
-        return true;
+        return resultado;
     }
 
     /**
